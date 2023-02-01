@@ -215,6 +215,8 @@ class FCSiamDiff(nn.Module):
         self.upsample = Upsample()
         self.pool = nn.MaxPool2d(kernel_size=2)
 
+        self.fusion = nn.Conv2d(2, 1, 1)
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         b, t, c, h, w = x.shape
         x = rearrange(x, "b t c h w -> (b t) c h w")
@@ -243,4 +245,4 @@ class FCSiamDiff(nn.Module):
             x = torch.cat([x, skip], dim=1)
             x = block(x)
 
-        return x
+        return self.fusion(x)

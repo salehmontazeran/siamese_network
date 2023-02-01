@@ -34,6 +34,8 @@ class ChangeDetectionDataset(torch.utils.data.Dataset):
             a_img = self.transform(a_img)
             b_img = self.transform(b_img)
 
+            label = np.array(label)
+            label = np.array(label, dtype=np.float32)
             label = np.clip(label, 0, 1)
             label_transforms = transforms.Compose([transforms.ToTensor()])
             label = label_transforms(label)
@@ -56,4 +58,4 @@ if __name__ == "__main__":
     dataset = ChangeDetectionDataset(root_dir, data_transforms)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-    print(dataset[0])
+    (dataset[2])
