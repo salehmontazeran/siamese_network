@@ -58,4 +58,4 @@ if __name__ == "__main__":
     dataset = ChangeDetectionDataset(root_dir, data_transforms)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-    (dataset[2])
+    print(torch.sum(dataset[2]["mask"] == 0))
